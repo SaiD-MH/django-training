@@ -8,11 +8,13 @@ from artists.models import Artist
 
 
 class Album(models.Model):
-    name = models.CharField(max_length=60, default='New Album')
-    artistName = models.ForeignKey(Artist, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100, default='New Album', blank=True)
+    artistName = models.ForeignKey(
+        Artist, on_delete=models.CASCADE, null=False)
     creationTime = models.DateTimeField(default=datetime.now)
-    release = models.DateTimeField(default=datetime.now)
-    cost = models.DecimalField(max_digits=10, decimal_places=5, default=0.0)
+    release = models.DateTimeField(
+        default=datetime.now, null=False, blank=False)
+    cost = models.DecimalField(max_digits=10, decimal_places=3, default=0.0)
     isApproved = models.BooleanField(
         default=False, help_text='Approve the album if its name is not explicit')
     # = models.IntegerField()
